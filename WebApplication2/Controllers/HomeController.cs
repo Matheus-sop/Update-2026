@@ -10,8 +10,11 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult About()
         {
             ViewData["Message"] = "Salles Web MVC App from C# Course.";
             return View();
@@ -20,7 +23,7 @@ namespace WebApplication2.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new WebApplication2.Models.ViewModels.ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
