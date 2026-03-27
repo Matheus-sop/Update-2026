@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication2.Data;
+
 namespace WebApplication2
 {
     public class Program
@@ -8,8 +9,13 @@ namespace WebApplication2
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var connectionString = builder.Configuration.GetConnectionString("WebApplication2Context");
+            var serverVersion = ServerVersion.AutoDetect(connectionString);
+
             builder.Services.AddDbContext<WebApplication2Context>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("WebApplication2Context") ?? throw new InvalidOperationException("Connection string 'WebApplication2Context' not found.")));
+                options.UseMySql(connectionString, serverVersion, mysqlOptions =>
+                    mysqlOptions.MigrationsAssembly("WebApplication2")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
