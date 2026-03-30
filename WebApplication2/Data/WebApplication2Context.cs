@@ -13,7 +13,8 @@ namespace WebApplication2.Data
             : base(options)
         {
         }
-
-        public DbSet<WebApplication2.Models.Department> Department { get; set; } = default!;
+        public DbSet<Department> Department { get; set; } = default!;
+        public DbSet<Seller> Seller { get; set; } = default!;
+        public DbSet<SalesRecord> SalesReecord { get; set; } = default!;
     }
 }
