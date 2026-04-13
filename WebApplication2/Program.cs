@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication2.Data;
 using WebApplication2.Models;
+using WebApplication2.Services;
 
 
 namespace WebApplication2
@@ -22,7 +23,8 @@ namespace WebApplication2
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            
+            builder.Services.AddScoped<SellerService>();
+
             var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())
