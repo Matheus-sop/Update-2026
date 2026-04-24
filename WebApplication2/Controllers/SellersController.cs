@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication2.Models;
+using WebApplication2.Models.ViewModels;
 using WebApplication2.Services;
 
 namespace WebApplication2.Controllers
@@ -11,8 +12,10 @@ namespace WebApplication2.Controllers
         
         
         private readonly SellerService _sellerService;
-        public SellersController(SellerService sellerService, WebApplication2Context context)
+        private readonly DeparmentService _departmentService;
+        public SellersController(SellerService sellerService, DeparmentService deparmentService, WebApplication2Context context)
         {
+            _departmentService = deparmentService;
             _sellerService = sellerService;
             _context = context;
         }
@@ -23,12 +26,15 @@ namespace WebApplication2.Controllers
         }
         public IActionResult Create()
         {
+            var departments = _departmentService.FindAll();
+            var viewModel = new SellerFormViewModel { Departments = departments };
             //var departments = _context.Department.Select(c => new SelectListItem
             //{
             //    Value = c.Id.ToString(),
             //    Text = c.Name
-                      
+
             //}).ToList();
+
             //ViewBag.Departments = new SelectList(_context.Department.ToList(), "Id", "Name");
 
             //var departmentsList = new List<SelectListItem>();
@@ -38,7 +44,7 @@ namespace WebApplication2.Controllers
             //    departmentsList.Add(departmentItem);
             //}
 
-            return View();
+            return View(viewModel);
         }
     
         [HttpPost]

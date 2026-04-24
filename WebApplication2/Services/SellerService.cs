@@ -15,7 +15,6 @@ namespace WebApplication2.Services
         }
         public void Insert(Seller obj)
         {
-            obj.Department = _context.Department.First();
             _context.Add(obj);
             _context.SaveChanges();
         }

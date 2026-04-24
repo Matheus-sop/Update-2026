@@ -24,6 +24,7 @@ namespace WebApplication2
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped<SellerService>();
+            builder.Services.AddScoped<DeparmentService>();
 
             var app = builder.Build();
 
