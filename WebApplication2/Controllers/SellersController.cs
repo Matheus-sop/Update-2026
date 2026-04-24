@@ -23,13 +23,13 @@ namespace WebApplication2.Controllers
         }
         public IActionResult Create()
         {
-            var departments = _context.Department.Select(c => new SelectListItem
-            {
-                Value = c.Id.ToString(),
-                Text = c.Name
+            //var departments = _context.Department.Select(c => new SelectListItem
+            //{
+            //    Value = c.Id.ToString(),
+            //    Text = c.Name
                       
-            }).ToList();
-
+            //}).ToList();
+            //ViewBag.Departments = new SelectList(_context.Department.ToList(), "Id", "Name");
 
             //var departmentsList = new List<SelectListItem>();
             //foreach (var department in _context.Department)
@@ -38,12 +38,6 @@ namespace WebApplication2.Controllers
             //    departmentsList.Add(departmentItem);
             //}
 
-            ViewBag.Departments = new SelectList(_context.Department.ToList(), "Id", "Name");   
-            //List<Department> departments = new List<Department>();
-
-            //departments = _context.Department.ToList();
-
-            //ViewBag.Departments = new SelectList(departments, "Id", "Name");
             return View();
         }
     
@@ -51,8 +45,8 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Seller seller)
         {
-            var department = _context.Department.Where(d => d.Id == seller.Department.Id).FirstOrDefault();
-            seller.Department = department;
+            //var department = _context.Department.Where(d => d.Id == seller.Department.Id).FirstOrDefault();
+            //seller.Department = department;
 
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
