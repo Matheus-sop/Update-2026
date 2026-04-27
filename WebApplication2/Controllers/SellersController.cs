@@ -10,8 +10,8 @@ namespace WebApplication2.Controllers
     public class SellersController : Controller
     {
         private readonly WebApplication2Context _context;
-        
-        
+
+
         private readonly SellerService _sellerService;
         private readonly DeparmentService _departmentService;
         public SellersController(SellerService sellerService, DeparmentService deparmentService, WebApplication2Context context)
@@ -47,7 +47,7 @@ namespace WebApplication2.Controllers
 
             return View(viewModel);
         }
-    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Seller seller)
@@ -74,10 +74,23 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete (int id)
+        public IActionResult Delete(int id)
         {
             _sellerService.Remove(id);
             return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var obj = _sellerService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
         }
     }
 }
